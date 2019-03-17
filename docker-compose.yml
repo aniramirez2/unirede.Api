@@ -1,0 +1,40 @@
+# dev config
+#
+# npm installation dependencies:
+#   docker-compose run --rm api npm install --only=dev
+#
+# start node + mongo servers and debug logs:
+#   docker-compose up
+#
+
+version: '2'
+services:
+
+  api:
+    image: node:8
+    volumes:
+    - ./:/helpcenter-api
+    working_dir: /helpcenter-api
+    command: ["npm","run", "devserver"]
+    environment:
+      - MONGO_SERVER=db
+    ports:
+      - 3200:3200
+    links:
+      - db
+
+  db:
+    image: mongo
+    volumes:
+    - helpcenter-db:/data
+
+volumes:
+  helpcenter-db: ~
+
+  #dbeditor:
+  #image: mongo-express
+  #restart: always
+  #ports:
+  #- 8803:8081
+  #environment:
+  #- ME_CONFIG_MONGODB_SERVER=db

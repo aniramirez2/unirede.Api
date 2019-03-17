@@ -1,0 +1,38 @@
+{
+  "name": "helpcenter_api",
+  "version": "1.0.0",
+  "description": "Api for help center ligero",
+  "main": "categories.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "devserver": "./node_modules/nodemon/bin/nodemon.js --ignore node_modules/ app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/complemento/helpCenter.Api.git"
+  },
+  "author": "Ana Ramirez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/complemento/helpCenter.Api/issues"
+  },
+  "homepage": "https://github.com/complemento/helpCenter.Api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "consign": "^0.1.6",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.0",
+    "mongodb": "^2.2.10",
+    "mv": "^2.1.1",
+    "mysql": "^2.16.0",
+    "socket.io": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
