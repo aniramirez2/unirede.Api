@@ -9,7 +9,7 @@ adminDAO.prototype.insertUser= function(user,res, req){
     var dados ={
         nome: user.nome,
         idade: user.idade,
-        permisao: user.permisao,
+        permissao: user.permissao,
         cpf: user.cpf,
         dataCriacao: new Date()
     }
@@ -27,10 +27,10 @@ adminDAO.prototype.insertUser= function(user,res, req){
         });
     });
 }
-adminDAO.prototype.listarArtigos = function(res){
-    var result
+adminDAO.prototype.listUsers = function(res){
+   
     this._connection.open(function(err, mongoclient){
-        mongoclient.collection("Artigo", function(err, collection){
+        mongoclient.collection("Users", function(err, collection){
             collection.find().toArray(function(err, result){
                 if(err){
                     res.json(err)
@@ -43,9 +43,9 @@ adminDAO.prototype.listarArtigos = function(res){
         });
     });
 }
-adminDAO.prototype.listarArtigoById = function(res, req){
+adminDAO.prototype.listUsersById = function(res, req){
     this._connection.open(function(err, mongoclient){
-        mongoclient.collection("Artigo", function(err, collection){
+        mongoclient.collection("Users", function(err, collection){
             collection.find(objectId(req.params.id)).toArray(function(err, result){
                 if(err){
                     res.json(err)
@@ -58,34 +58,21 @@ adminDAO.prototype.listarArtigoById = function(res, req){
         });
     });
 }
-adminDAO.prototype.listarArtigoByCategoria = function(res, req){
-    this._connection.open(function(err, mongoclient){
-        mongoclient.collection("Artigo", function(err, collection){
-            collection.find({categoria:{$eq:req.params.id }}).toArray(function(err, result){
-                if(err){
-                    res.json(err)
-                }else{
-                    res.json(result)
-                }
-                mongoclient.close();
-            })
-            
-        });
-    });
-}
-adminDAO.prototype.updateArtigo = function(res, req){
+adminDAO.prototype.updateUser = function(res, req){
    
     var dados ={
-        titulo: req.body.titulo,
-        palavras: req.body.palavras.split(","),
-        categoria: req.body.categoria.split(","),
-        artigo: req.body.artigo,
+        nome: req.body.nome,
+        idade: req.body.idade,
+        permissao: req.body.permissao,
+        cpf: req.body.cpf,
+        dataAtualizacao: new Date()
     }
     this._connection.open(function(err, mongoclient){
-        mongoclient.collection("Artigo", function(err, collection){
+        mongoclient.collection("Users", function(err, collection){
             collection.update(
                 {_id: objectId(req.params.id)},
-                {$set:{titulo:dados.titulo, palavras:dados.palavras, categoria: dados.categoria, artigo: dados.artigo}},
+                {$set:{nome: dados.nome, idade: dados.idade, permissao: dados.permissao, cpf: dados.cpf,
+                dataAtualizacao: dados.dataAtualizacao}},
                 {},
                 function(err,result){
                     if(err){
@@ -100,9 +87,9 @@ adminDAO.prototype.updateArtigo = function(res, req){
         });
     });
 }
-adminDAO.prototype.deleteArtigo = function(res, req){
+adminDAO.prototype.deleteUser = function(res, req){
     this._connection.open(function(err, mongoclient){
-        mongoclient.collection("Artigo", function(err, collection){
+        mongoclient.collection("Users", function(err, collection){
             collection.remove({_id: objectId(req.params.id)}, function(err, result){
                 
                     if(err){
