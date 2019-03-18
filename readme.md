@@ -20,7 +20,7 @@ Node Js
 Mongo:
 
 Create a database called unirede_test
-Create a collection caled Users
+Create a collection called Users
 
 By postman:
 
